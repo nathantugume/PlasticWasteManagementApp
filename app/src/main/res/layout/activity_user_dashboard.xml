@@ -118,6 +118,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
            android:orientation="horizontal">
 
            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/collection_center_card"
                android:layout_width="180dp"
                android:layout_height="200dp"
                app:cardCornerRadius="8dp"
@@ -142,6 +143,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
                        android:adjustViewBounds="true"
                        android:scaleType="fitXY"
                        android:src="@mipmap/plastic_sorting"
+                       style="@style/NoCornerRadius"
 
                        />
 
@@ -160,6 +162,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
            </com.google.android.material.card.MaterialCardView>
            <com.google.android.material.card.MaterialCardView
+               android:id="@+id/plastic_sorting_card"
                android:layout_width="180dp"
                android:layout_height="200dp"
                android:layout_margin="5dp"
@@ -201,7 +204,6 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="10dp"
-
            android:orientation="vertical">
 
            <LinearLayout
@@ -245,6 +247,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                </com.google.android.material.card.MaterialCardView>
                <com.google.android.material.card.MaterialCardView
+                  android:id="@+id/recycling_card"
                    android:layout_width="180dp"
                    android:layout_height="200dp"
                    android:layout_margin="5dp"

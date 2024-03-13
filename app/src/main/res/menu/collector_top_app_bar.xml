@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_notifications_24"
+        android:title="Notifications"
+        android:contentDescription="settings icon"
+        app:showAsAction="ifRoom" />
+
+</menu>

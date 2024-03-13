@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "608625635149",
+    "project_id": "plasticwastemanagementapp",
+    "storage_bucket": "plasticwastemanagementapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608625635149:android:c1a71e84adf7713e5d9104",
+        "android_client_info": {
+          "package_name": "com.ugwebstudio.plasticwastemanagementapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP8n5EVBDoM0cCFDpCrBMuvGSp_bW0JdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
