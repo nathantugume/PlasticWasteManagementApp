@@ -55,7 +55,7 @@
                 android:textSize="15sp"
                 />
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pickupDate"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -68,11 +68,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/pickupDate"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pickupTime"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -82,8 +83,31 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pickupTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pickupLocationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Select Pickup Location"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_location"
+                android:focusable="false"
+                android:clickable="true"
+                android:focusableInTouchMode="false"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pickupLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,29 +126,38 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_margin="10dp"
+                app:selectionRequired="true"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:id="@+id/chipGroup"
                 >
                 <com.google.android.material.chip.Chip
                     android:id="@+id/bottles_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:text="Bottles"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/plastic_bottle_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:text="Plastic bags"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ps_foam_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+
                     android:text="PS Foam"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/pp_container_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+
                     android:text="PP Container"/>
 
 
@@ -132,18 +165,21 @@
                     android:id="@+id/hdpe_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:text="HDPE Containers"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:text="LDPE Films"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/others_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:text="Other"/>
         </com.google.android.material.chip.ChipGroup>
 
@@ -161,13 +197,16 @@
 
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:layout_width="match_parent"
+                android:id="@+id/notificationSwitch"
+               android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Get Notified the Date Before"
+                android:checked="true"
                 android:textSize="15sp"
                 android:layout_margin="10dp"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/scheduleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#2B932B"
