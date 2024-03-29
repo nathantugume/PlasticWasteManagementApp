@@ -1,5 +1,6 @@
 package com.ugwebstudio.plasticwastemanagementapp.ui.collector;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,10 +33,15 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
     private static final String[] STATUS_OPTIONS = {"Scheduled", "Completed", "Pending", "Cancelled"};
     private static final String TAG = "UPCOMING STATUS";
 
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_collections);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Pickups ...");
+        progressDialog.setCancelable(false);
 
         pickupsRef = db.collection("pickups");
 
@@ -74,27 +81,21 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
     }
 
     private void fetchPickupsByStatus(String status) {
+        progressDialog.show();
         Query query = pickupsRef.whereEqualTo("status", status);
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Pickup> pickups = new ArrayList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    String date = document.getString("date");
-                    boolean notificationEnabled = document.getBoolean("notificationEnabled");
-                    String selectedChipTypes = document.getString("selectedChipTypes");
-                    String time = document.getString("time");
-                    String userId = document.getString("userId");
-                    String collector = document.getString("collector");
-                    String scheduledDate = document.getString("scheduledDate");
-                    String documentId = document.getId();
-
-                    // Create Pickup object
-                    Pickup pickup = new Pickup(date, notificationEnabled, selectedChipTypes, status, time, userId, collector, scheduledDate,documentId);
+                    Pickup pickup = document.toObject(Pickup.class);
+                    pickup.setDocumentId(document.getId());
                     pickups.add(pickup);
                 }
                 // Update the RecyclerView with the filtered pickups
                 pickupAdapter.setPickupList(pickups);
+                progressDialog.dismiss();
             } else {
+                progressDialog.dismiss();
                 // Handle unsuccessful fetch
                 Log.e(TAG, "Error getting pickups by status", task.getException());
             }
@@ -104,29 +105,24 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
     private void fetchPickups() {
         // Fetch pickups from Firestore
         // You can use Firestore query to retrieve pickups and then set them in RecyclerView adapter
-        // For example:
+
+        progressDialog.show();
 
         Query query = pickupsRef.whereEqualTo("status", "Scheduled");
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Pickup> pickups = new ArrayList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    String date = document.getString("date");
-                    boolean notificationEnabled = document.getBoolean("notificationEnabled");
-                    String selectedChipTypes = document.getString("selectedChipTypes");
-                    String time = document.getString("time");
-                    String userId = document.getString("userId");
-                    String collector = document.getString("collector");
-                    String scheduledDate = document.getString("scheduledDate");
-
-                    // Create Pickup object
-                    Pickup pickup = new Pickup(date, notificationEnabled, selectedChipTypes, "scheduled", time, userId, collector, scheduledDate, document.getId());
+                    Pickup pickup = document.toObject(Pickup.class);
+                    pickup.setDocumentId(document.getId());
                     pickups.add(pickup);
                 }
                 // Update the RecyclerView with the filtered pickups
                 pickupAdapter.setPickupList(pickups);
+                progressDialog.dismiss();
             } else {
                 // Handle unsuccessful fetch
+                progressDialog.dismiss();
                 Log.e(TAG, "Error getting pickups by status", task.getException());
             }
         });
@@ -134,5 +130,6 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
 
         List<Pickup> pickups = new ArrayList<>(); // Replace this with actual pickups fetched from Firestore
         pickupAdapter.setPickupList(pickups);
+        progressDialog.dismiss();
     }
 }

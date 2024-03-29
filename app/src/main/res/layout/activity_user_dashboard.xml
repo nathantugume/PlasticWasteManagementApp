@@ -75,9 +75,9 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
                    android:textColor="@color/black"/>
 
                <TextView
+                   android:id="@+id/textPercentage"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="50%"
                    android:textSize="16sp"
                    android:textColor="@color/black"/>
 
@@ -88,7 +88,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
                    android:layout_height="wrap_content"
                    android:layout_marginTop="8dp"
                    android:max="1000"
-                   android:progress="500"
+                   android:progress="0"
                    android:progressTint="#EF1111"/>
 
                <LinearLayout
@@ -98,9 +98,9 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
                    android:gravity="start">
 
                    <TextView
+                       android:id="@+id/currentPoints"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="500/"
                        android:textSize="14sp"
                        android:textColor="@color/black"/>
 

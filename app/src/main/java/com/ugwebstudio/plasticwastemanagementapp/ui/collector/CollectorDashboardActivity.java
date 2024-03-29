@@ -184,7 +184,7 @@ public class CollectorDashboardActivity extends AppCompatActivity implements OnM
 
 
                         nextPickupTimeTextView.setText(pickupDate + ", " + pickupTime);
-                            nextPickupLocationTextView.setText("Location: " + textLocation);
+                            nextPickupLocationTextView.setText(textLocation);
 
                     } else {
                         Log.e("fetchScheduledPending", "Error fetching pending pickups: " + task.getException());

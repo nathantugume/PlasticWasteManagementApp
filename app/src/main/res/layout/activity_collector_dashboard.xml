@@ -42,7 +42,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-
             android:orientation="vertical">
 
             <LinearLayout
@@ -316,6 +315,7 @@
         android:id="@+id/navigationView"
         app:headerLayout="@layout/header_navigation_drawer"
         app:menu="@menu/collector_navigation_drawer"
+
         >
 
     </com.google.android.material.navigation.NavigationView>

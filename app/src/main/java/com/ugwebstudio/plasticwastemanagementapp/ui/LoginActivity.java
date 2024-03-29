@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     // Hide progress dialog
-                    progressDialog.dismiss();
+
                     if (task.isSuccessful()) {
                         // After successful authentication, retrieve user's account type from Firestore
                         FirebaseUser user = mAuth.getCurrentUser();
@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 // Navigate user to the corresponding dashboard activity
                                                 if (accountType != null) {
                                                     startActivityBasedOnAccountType();
+                                                    progressDialog.dismiss();
                                                     finish(); // Finish LoginActivity to prevent user from coming back here
                                                 } else {
                                                     // Account type not found
