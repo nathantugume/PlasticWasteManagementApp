@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/bottom_nav_home"
         android:enabled="true"
         android:icon="@drawable/home_24"
-        android:title="Home"/>
+        android:title="@string/home"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/bottom_nav_collections"
+        android:enabled="true"
+        android:icon="@drawable/ic_pickup"
+        android:title="Collections"/>
+    <item
+        android:id="@+id/bottom_nav_pickups"
+        android:enabled="true"
+        android:icon="@drawable/ic_collect"
+        android:title="Pickups"/>
+    <item
+        android:id="@+id/bottom_nav_reports"
         android:enabled="true"
         android:icon="@drawable/ic_statistics_24"
-        android:title="Statistics"/>
-    <item
-        android:id="@+id/page_3"
-        android:enabled="true"
-        android:icon="@drawable/ic_notifications_24"
-        android:title="Notifications"/>
-    <item
-        android:id="@+id/page_4"
-        android:enabled="true"
-        android:icon="@drawable/settings_24"
-        android:title="Settings"/>
+        android:title="Reports"/>
 </menu>

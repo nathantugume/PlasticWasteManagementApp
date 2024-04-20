@@ -1,6 +1,7 @@
 package com.ugwebstudio.plasticwastemanagementapp.ui.collector;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -38,6 +41,10 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_collections);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+
+        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading Pickups ...");
@@ -78,11 +85,31 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
             }
         });
         fetchPickups();
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.bottom_nav_collections){
+                startActivity(new Intent(this, UpcomingCollectionsActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_pickups){
+                startActivity(new Intent(this, UpcomingCollectionsActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_reports){
+                startActivity(new Intent(this, ReportsActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_home){
+                startActivity(new Intent(this, CollectorDashboardActivity.class));
+                return true;
+            }
+            return false;
+        });
     }
 
     private void fetchPickupsByStatus(String status) {
         progressDialog.show();
-        Query query = pickupsRef.whereEqualTo("status", status);
+        Query query = pickupsRef.whereEqualTo("status", status.toLowerCase());
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Pickup> pickups = new ArrayList<>();
@@ -132,4 +159,6 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
         pickupAdapter.setPickupList(pickups);
         progressDialog.dismiss();
     }
+
+
 }

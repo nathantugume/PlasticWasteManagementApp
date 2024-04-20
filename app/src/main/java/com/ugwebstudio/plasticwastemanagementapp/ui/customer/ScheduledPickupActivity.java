@@ -37,17 +37,17 @@ public class ScheduledPickupActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String currentUserName = sharedPreferences.getString("UID", ""); // Assuming "UID" is the key
 
-// Continue with the rest of your code...
 
 
-// Assuming you have references to the TextViews in your layout
+
+
         TextView textPickupSelectedBy = findViewById(R.id.text_pickup_scheduledby);
         TextView textPickupInfo = findViewById(R.id.text_pickup_info);
         TextView textPickupType = findViewById(R.id.text_pickup_type);
         TextView textPickupStatus = findViewById(R.id.text_pickup_status);
         TextView textPickupCollector = findViewById(R.id.text_pickup_collector);
         MaterialCardView scheduleInfoCard = findViewById(R.id.schedule_info_card);
-        TextView noScheduleText = findViewById(R.id.noScheduleText);
+//        TextView noScheduleText = findViewById(R.id.noScheduleText);
 
 // Get the current user ID
         String currentUserId = auth.getCurrentUser().getUid();
@@ -57,37 +57,33 @@ public class ScheduledPickupActivity extends AppCompatActivity {
         db.collection("pickups")
                 .whereEqualTo("userId", currentUserId)
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                String status = documentSnapshot.getString("status");
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            String status = documentSnapshot.getString("status");
 
-                                if (!status.equals("collected")) {
-                                    String selectedBy = currentUserName; // Assuming you have currentUserName
-                                    String date = documentSnapshot.getString("date");
-                                    String time = documentSnapshot.getString("time");
-                                    String types = documentSnapshot.getString("selectedChipTypes");
-                                    String collector = documentSnapshot.getString("collector");
+                            if (!status.equals("collected")) {
+                                String selectedBy = currentUserName; // Assuming you have currentUserName
+                                String date = documentSnapshot.getString("date");
+                                String time = documentSnapshot.getString("time");
+                                String types = documentSnapshot.getString("selectedChipTypes");
+                                String collector = documentSnapshot.getString("collector");
 
-                                    // Set the values to the TextViews
-                                    textPickupSelectedBy.setText(selectedBy);
-                                    textPickupInfo.setText("Date: " + date + "\nTime: " + time);
-                                    textPickupType.setText(types);
-                                    textPickupStatus.setText(status);
-                                    textPickupCollector.setText(collector);
-                                } else {
-                                    Toast.makeText(ScheduledPickupActivity.this, "Already collected!! no new schedule", Toast.LENGTH_SHORT).show();
-                                }
+                                // Set the values to the TextViews
+                                textPickupSelectedBy.setText(selectedBy);
+                                textPickupInfo.setText("Date: " + date + "\nTime: " + time);
+                                textPickupType.setText(types);
+                                textPickupStatus.setText(status);
+                                textPickupCollector.setText(collector);
+                            } else {
+                                Toast.makeText(ScheduledPickupActivity.this, "Already collected!! no new schedule", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            // No documents found
-                            Toast.makeText(ScheduledPickupActivity.this, "No Schedule made Yet", Toast.LENGTH_SHORT).show();
-                            scheduleInfoCard.setVisibility(View.GONE);
-                            noScheduleText.setVisibility(View.VISIBLE);
                         }
+                    } else {
+                        // No documents found
+                        Toast.makeText(ScheduledPickupActivity.this, "No Schedule made Yet", Toast.LENGTH_SHORT).show();
+                        scheduleInfoCard.setVisibility(View.GONE);
+                        //noScheduleText.setVisibility(View.VISIBLE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

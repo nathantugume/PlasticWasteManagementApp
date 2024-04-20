@@ -15,7 +15,7 @@ public class GeocodingUtil {
         String addressText = "";
 
         try {
-            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 5);
             if (addresses != null && addresses.size() > 0) {
                 Address address = addresses.get(0);
                 addressText = address.getFeatureName(); // Get the first line of the address

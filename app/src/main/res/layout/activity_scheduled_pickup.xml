@@ -196,17 +196,17 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/noScheduleText"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="You Have No Schedule at the moment!!"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/green"
-        android:layout_margin="40dp"
-        android:textAlignment="center"/>
+<!--    <TextView-->
+<!--        android:id="@+id/noScheduleText"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="You Have No Schedule at the moment!!"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/green"-->
+<!--        android:layout_margin="40dp"-->
+<!--        android:textAlignment="center"/>-->
 
 
     <!-- Action Button -->

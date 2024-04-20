@@ -13,13 +13,14 @@ public class Pickup {
 
     private String documentId;
 
+    private String pickupLocation;
+
     // Default constructor
     public Pickup() {
         // Default constructor required for Firebase
     }
-
     // Parameterized constructor
-    public Pickup(String date, boolean notificationEnabled, String selectedChipTypes, String status, String time, String userId, String collector, String scheduledDate,String documentId) {
+    public Pickup(String date, boolean notificationEnabled, String selectedChipTypes, String status, String time, String userId, String collector, String scheduledDate, String documentId, String pickupLocation) {
         this.date = date;
         this.notificationEnabled = notificationEnabled;
         this.selectedChipTypes = selectedChipTypes;
@@ -29,9 +30,9 @@ public class Pickup {
         this.collector = collector;
         this.scheduledDate = scheduledDate;
         this.documentId = documentId;
+        this.pickupLocation = pickupLocation;
     }
 
-    // Getters and setters
     public String getDate() {
         return date;
     }
@@ -103,5 +104,12 @@ public class Pickup {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
-}
 
+    public String getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public void setPickupLocation(String pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+}

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,12 +20,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ugwebstudio.plasticwastemanagementapp.R;
 import com.ugwebstudio.plasticwastemanagementapp.ui.Donor.DonorDashboardActivity;
-import com.ugwebstudio.plasticwastemanagementapp.ui.Donor.GetStartedDonorActivity;
-import com.ugwebstudio.plasticwastemanagementapp.ui.Organisation.GetStartedOrganizationActivity;
 import com.ugwebstudio.plasticwastemanagementapp.ui.Organisation.OrganisationDashboardActivity;
 import com.ugwebstudio.plasticwastemanagementapp.ui.collector.CollectorDashboardActivity;
-import com.ugwebstudio.plasticwastemanagementapp.ui.collector.GetStartedCollectorActivity;
-import com.ugwebstudio.plasticwastemanagementapp.ui.customer.GetStartedIndividualActivity;
 import com.ugwebstudio.plasticwastemanagementapp.ui.customer.UserDashboardActivity;
 
 import java.util.Objects;
@@ -104,15 +101,18 @@ public class LoginActivity extends AppCompatActivity {
                                             if (document != null && document.exists()) {
                                                 // Retrieve account type from Firestore
                                                  accountType = document.getString("accountType");
-                                                 String UID = document.getId();
+                                                 String UID = user.getUid();
+                                                 String phone = document.getString("phone");
                                                  Boolean isFirstLogin = document.getBoolean("isFirstLogin");
                                                 // save account type for later user
                                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                                 editor.putString("accountType", accountType);
                                                 editor.putString("UID",UID);
                                                 editor.putBoolean("isFirstLogin", Boolean.TRUE.equals(isFirstLogin));
+                                                editor.putString("phone",phone);
                                                 editor.apply();
 
+                                                Log.d("uuid",UID);
                                                 // Navigate user to the corresponding dashboard activity
                                                 if (accountType != null) {
                                                     startActivityBasedOnAccountType();

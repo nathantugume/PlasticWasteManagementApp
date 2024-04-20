@@ -117,6 +117,18 @@ public class UserDashboardActivity extends AppCompatActivity {
         collectionCard.setOnClickListener(view -> startActivity(new Intent(UserDashboardActivity.this, CollectionCentersActivity.class)));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchPoints();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        fetchPoints();
+    }
+
     private void share() {
         ApplicationInfo app = getApplicationContext().getApplicationInfo();
         String filePath = app.sourceDir;
