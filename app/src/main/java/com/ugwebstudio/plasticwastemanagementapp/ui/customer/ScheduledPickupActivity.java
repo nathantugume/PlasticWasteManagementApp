@@ -27,8 +27,6 @@ public class ScheduledPickupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduled_pickup);
-
-
         // Assuming you have initialized Firebase Firestore and FirebaseAuth
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -36,10 +34,6 @@ public class ScheduledPickupActivity extends AppCompatActivity {
         // Get the current user ID from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String currentUserName = sharedPreferences.getString("UID", ""); // Assuming "UID" is the key
-
-
-
-
 
         TextView textPickupSelectedBy = findViewById(R.id.text_pickup_scheduledby);
         TextView textPickupInfo = findViewById(R.id.text_pickup_info);
@@ -86,12 +80,9 @@ public class ScheduledPickupActivity extends AppCompatActivity {
                         //noScheduleText.setVisibility(View.VISIBLE);
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle failure
-                        Toast.makeText(ScheduledPickupActivity.this, "Sorry we are unable to fetch your results at the moment!!", Toast.LENGTH_LONG).show();
-                    }
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                    Toast.makeText(ScheduledPickupActivity.this, "Sorry we are unable to fetch your results at the moment!!", Toast.LENGTH_LONG).show();
                 });
 
 

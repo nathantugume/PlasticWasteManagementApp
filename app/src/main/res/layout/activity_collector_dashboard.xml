@@ -24,6 +24,7 @@
             app:titleCentered="true"
             app:menu="@menu/collector_top_app_bar"
             app:navigationIcon="@drawable/ic_menu_24dp"
+            app:navigationIconTint="@color/green"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             />
 
@@ -180,7 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    >
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/map_view"
@@ -302,10 +303,11 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
         android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/green"
+        app:itemTextColor="@color/green"
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
+
         />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <com.google.android.material.navigation.NavigationView

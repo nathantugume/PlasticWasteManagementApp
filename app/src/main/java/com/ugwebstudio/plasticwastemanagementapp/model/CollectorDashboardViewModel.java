@@ -6,9 +6,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.ugwebstudio.plasticwastemanagementapp.classes.SmsSender;
+
+import java.io.IOException;
 
 public class CollectorDashboardViewModel extends ViewModel {
 
@@ -103,11 +108,47 @@ public class CollectorDashboardViewModel extends ViewModel {
         });
     }
     public void updatePickup(String pickupId, double weight) {
-        db.collection("pickups").document(pickupId)
-                .update("status", "Completed", "weight", weight)
-                .addOnSuccessListener(aVoid -> Log.d("ViewModel", "Pickup marked as completed!"))
-                .addOnFailureListener(e -> Log.e("ViewModel", "Failed to update pickup: " + e.getMessage()));
+
+        DocumentReference pickupRef = db.collection("pickups").document(pickupId);
+        pickupRef.update("status", "Completed", "weight", weight)
+                .addOnSuccessListener(unused -> {
+                    Log.d("UpdatePickup", "Pickup marked as completed!");
+                    fetchUserAndNotify(pickupRef);
+                })
+                .addOnFailureListener(e -> Log.e("UpdatePickup", "Failed to update pickup: " + e.getMessage()));
     }
+
+    private void fetchUserAndNotify(DocumentReference pickupRef) {
+        pickupRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                String userId = documentSnapshot.getString("userId");
+                fetchPhoneAndSendNotification(userId);
+            } else {
+                Log.e("FetchUser", "Pickup document does not exist.");
+            }
+        });
+    }
+
+    private void fetchPhoneAndSendNotification(String userId) {
+        db.collection("users").document(userId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String phone = documentSnapshot.getString("phone");
+                        String message = "Your pickup has been completed successfully.";
+                        sendNotification(phone, message);
+                    } else {
+                        Log.e("FetchPhone", "User document does not exist.");
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("FetchPhone", "Failed to fetch user phone: " + e.getMessage()));
+    }
+
+    private void sendNotification(String phone, String message) {
+        // Implementation to send SMS or app notification
+        SmsSender.sendSms( phone, message);
+    }
+
+
 
 
     public static class PickupDetails {

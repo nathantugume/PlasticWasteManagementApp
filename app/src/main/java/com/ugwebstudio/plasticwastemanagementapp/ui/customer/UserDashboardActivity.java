@@ -1,6 +1,8 @@
 package com.ugwebstudio.plasticwastemanagementapp.ui.customer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -11,12 +13,15 @@ import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -64,6 +69,31 @@ public class UserDashboardActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.navigationView);
         topAppBar.setNavigationOnClickListener(view -> drawerLayout.open());
         currentPointsText = findViewById(R.id.currentPoints);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        topAppBar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.customer_profile){
+                startActivity(new Intent(UserDashboardActivity.this, CustomerProfileActivity.class));
+                return true;
+            }
+            return false;
+        });
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+           if (item.getItemId() == R.id.bottom_nav_recycling){
+               startActivity(new Intent(UserDashboardActivity.this, RecyclingActivity.class));
+               return true;
+           }
+            if (item.getItemId() == R.id.bottom_nav_redeem){
+                startActivity(new Intent(UserDashboardActivity.this, RedeemPointActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_reports){
+                startActivity(new Intent(UserDashboardActivity.this, CustomerReportActivity.class));
+                return true;
+            }
+
+            return false;
+        });
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.scheduled_pickup){

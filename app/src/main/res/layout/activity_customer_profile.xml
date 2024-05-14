@@ -1,0 +1,160 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       >
+       <com.google.android.material.appbar.AppBarLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <com.google.android.material.appbar.MaterialToolbar
+               android:id="@+id/topAppBar"
+               android:layout_width="match_parent"
+               android:layout_height="?attr/actionBarSize"
+               android:background="@color/white"
+               app:title="Profile"
+               app:titleTextColor="@color/black"
+               app:titleCentered="true"
+               app:navigationIcon="@drawable/ic_back"
+               style="@style/Widget.MaterialComponents.Toolbar.Primary"
+               />
+
+       </com.google.android.material.appbar.AppBarLayout>
+
+       <!-- Note: A RecyclerView can also be used -->
+       <com.google.android.material.card.MaterialCardView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="20dp"
+           app:cardCornerRadius="15dp"
+           app:cardElevation="2dp"
+           style="@style/Widget.MaterialComponents.CardView"
+           android:background="@color/white"
+           android:layout_gravity="center_horizontal|center_vertical"
+           >
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_margin="20dp"
+               >
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Name">
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/userNameTextView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"/>
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:hint="Email">
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/userEmailTextView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+
+                       />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:hint="Phone">
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/phoneTextView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"/>
+               </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:passwordToggleEnabled="true"
+                   android:layout_marginTop="10dp"
+                   android:hint="Current password">
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/currentPasswordTextView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:inputType="textPassword"
+
+                       />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:passwordToggleEnabled="true"
+                   android:layout_marginTop="10dp"
+                   android:hint="New password">
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/passwordTextView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:inputType="textPassword"
+
+                       />
+               </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   app:passwordToggleEnabled="true"
+                   android:hint="Confirm password">
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/confirmPasswordTextView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:inputType="textPassword"
+
+                       />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <Button
+                   android:id="@+id/editPassword"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Edit Profile"
+                   android:backgroundTint="@color/green"
+                   style="@style/ThemeOverlay.Material3.Button.ElevatedButton"
+                   android:layout_margin="30dp"
+                   />
+
+
+
+
+           </LinearLayout>
+       </com.google.android.material.card.MaterialCardView>
+
+
+
+   </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/user_bottom_navigation_menu"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="labeled"
+        android:layout_gravity="bottom"
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

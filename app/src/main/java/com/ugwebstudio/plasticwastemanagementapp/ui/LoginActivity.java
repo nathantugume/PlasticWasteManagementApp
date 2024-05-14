@@ -19,8 +19,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ugwebstudio.plasticwastemanagementapp.R;
+import com.ugwebstudio.plasticwastemanagementapp.classes.Scheduler;
 import com.ugwebstudio.plasticwastemanagementapp.ui.Donor.DonorDashboardActivity;
 import com.ugwebstudio.plasticwastemanagementapp.ui.Organisation.OrganisationDashboardActivity;
+import com.ugwebstudio.plasticwastemanagementapp.ui.admin.AdminDashboardActivity;
 import com.ugwebstudio.plasticwastemanagementapp.ui.collector.CollectorDashboardActivity;
 import com.ugwebstudio.plasticwastemanagementapp.ui.customer.UserDashboardActivity;
 
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Scheduler.schedulePickupCheck(this);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -110,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 editor.putString("UID",UID);
                                                 editor.putBoolean("isFirstLogin", Boolean.TRUE.equals(isFirstLogin));
                                                 editor.putString("phone",phone);
+                                                editor.putString("email",email);
                                                 editor.apply();
 
                                                 Log.d("uuid",UID);
@@ -151,8 +155,8 @@ public class LoginActivity extends AppCompatActivity {
                 case "Organisation":
                     startActivity(new Intent(LoginActivity.this, OrganisationDashboardActivity.class));
                     break;
-                case "Donor":
-                    startActivity(new Intent(LoginActivity.this, DonorDashboardActivity.class));
+                case "admin":
+                    startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
                     break;
                 case "Collector":
                     startActivity(new Intent(LoginActivity.this, CollectorDashboardActivity.class));

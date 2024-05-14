@@ -3,6 +3,7 @@ package com.ugwebstudio.plasticwastemanagementapp.ui.customer;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,12 +17,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Transaction;
 import com.ugwebstudio.plasticwastemanagementapp.R;
+import com.ugwebstudio.plasticwastemanagementapp.classes.SmsSender;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +48,7 @@ public class RedeemPointActivity extends AppCompatActivity {
     private Button btnRedeem;
 
     private int userPoints;
+    private String phone;
 
 
 
@@ -58,6 +63,8 @@ public class RedeemPointActivity extends AppCompatActivity {
         btnRedeem = findViewById(R.id.btn_redeem);
 
         redeemMessage = findViewById(R.id.redeem_message);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        phone = sharedPreferences.getString("phone", ""); // Assuming "UID" is the key
 
         // Fetch user points from Firestore
         fetchUserPoints();
@@ -70,6 +77,40 @@ public class RedeemPointActivity extends AppCompatActivity {
 
         // Handle redeem button click
         btnRedeem.setOnClickListener(view -> redeemPoints());
+
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        topAppBar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.customer_profile){
+                startActivity(new Intent(this, CustomerProfileActivity.class));
+                return true;
+            }
+            return false;
+        });
+
+        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.bottom_nav_home){
+                startActivity(new Intent(this, UserDashboardActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_recycling){
+                startActivity(new Intent(this, RecyclingActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_redeem){
+                startActivity(new Intent(this, RedeemPointActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_reports){
+                startActivity(new Intent(this, CustomerReportActivity.class));
+                return true;
+            }
+
+            return false;
+        });
     }
 
     // Fetch user points from Firestore
@@ -179,8 +220,7 @@ public class RedeemPointActivity extends AppCompatActivity {
         if (selectedId != -1) {
             RadioButton radioButton = findViewById(selectedId);
             String option = radioButton.getText().toString();
-            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-            String phone = sharedPreferences.getString("phone", ""); // Assuming "UID" is the key
+
 
             String amount = extractAmount(option); // Implement method to extract amount based on option
 
@@ -259,8 +299,11 @@ public class RedeemPointActivity extends AppCompatActivity {
                     long newPoints = currentPoints - Long.parseLong(pointsToDeduct);
                     transaction.update(pointsRef, "points", newPoints);
                     return null;
-                }).addOnSuccessListener(aVoid -> Log.d("UpdatePoints", "Points deducted successfully"))
-                .addOnFailureListener(e -> Log.e("UpdatePoints", "Failed to deduct points", e));
+                }).addOnSuccessListener(unused -> {
+                    Log.d("UpdatePoints", "Points deducted successfully");
+            SmsSender.sendSms( phone, "You have successfully Redeemed "+pointsToDeduct+" points from Plastic Waste Collection");
+
+        }).addOnFailureListener(e -> Log.e("UpdatePoints", "Failed to deduct points", e));
     }
 
 

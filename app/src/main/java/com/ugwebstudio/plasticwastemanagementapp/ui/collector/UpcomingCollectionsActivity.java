@@ -109,7 +109,7 @@ public class UpcomingCollectionsActivity extends AppCompatActivity {
 
     private void fetchPickupsByStatus(String status) {
         progressDialog.show();
-        Query query = pickupsRef.whereEqualTo("status", status.toLowerCase());
+        Query query = pickupsRef.whereEqualTo("status", status);
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Pickup> pickups = new ArrayList<>();

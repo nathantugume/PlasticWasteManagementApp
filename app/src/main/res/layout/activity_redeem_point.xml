@@ -106,7 +106,7 @@
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation_menu"
+        app:menu="@menu/user_bottom_navigation_menu"
         android:background="@color/white"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"

@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -104,6 +106,40 @@ public class SchedulePickupActivity extends AppCompatActivity {
             // Start MapsActivity to select location
             Intent intent = new Intent(SchedulePickupActivity.this, MapsActivity.class);
             startActivityForResult(intent, REQUEST_CODE_MAP);
+        });
+
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        topAppBar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.customer_profile){
+                startActivity(new Intent(this, CustomerProfileActivity.class));
+                return true;
+            }
+            return false;
+        });
+
+        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.bottom_nav_home){
+                startActivity(new Intent(this, UserDashboardActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_recycling){
+                startActivity(new Intent(this, RecyclingActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_redeem){
+                startActivity(new Intent(this, RedeemPointActivity.class));
+                return true;
+            }
+            if (item.getItemId() == R.id.bottom_nav_reports){
+                startActivity(new Intent(this, CustomerReportActivity.class));
+                return true;
+            }
+
+            return false;
         });
     }
 

@@ -305,7 +305,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation_menu"
+        app:menu="@menu/user_bottom_navigation_menu"
         android:background="@color/white"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
@@ -322,6 +322,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
         android:id="@+id/navigationView"
         app:headerLayout="@layout/header_navigation_drawer"
         app:menu="@menu/user_navigation_drawer"
+
         >
 
     </com.google.android.material.navigation.NavigationView>
