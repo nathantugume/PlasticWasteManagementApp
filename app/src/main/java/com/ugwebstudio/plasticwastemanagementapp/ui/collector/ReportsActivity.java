@@ -1,6 +1,7 @@
 package com.ugwebstudio.plasticwastemanagementapp.ui.collector;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,15 +30,22 @@ public class ReportsActivity extends AppCompatActivity {
     private ReportsAdapter adapter;
     private TextView textViewFrom;
     private TextView textViewTo;
+    private TextView no_report_found_txt;
     private Calendar fromCalendar = Calendar.getInstance();
     private Calendar toCalendar = Calendar.getInstance();
     private String userID;
-
+    private Context context;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Reports ...");
+        progressDialog.setCancelable(false);
+
+        context = getApplicationContext();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
 
@@ -47,6 +55,8 @@ public class ReportsActivity extends AppCompatActivity {
         reportsRecyclerView = findViewById(R.id.reportsRecyclerView);
         adapter = new ReportsAdapter(new ArrayList<>());
         reportsRecyclerView.setAdapter(adapter);
+        no_report_found_txt = findViewById(R.id.no_report_found_txt);
+
 
         // Initialize TextViews for date picking
         textViewFrom = findViewById(R.id.textViewFrom);
@@ -122,8 +132,9 @@ public class ReportsActivity extends AppCompatActivity {
 
     private void fetchReports() {
         // Example user ID and conversion of dates from Calendar to Date type
+        progressDialog.show();
         Date startDate = fromCalendar.getTime();
         Date endDate = toCalendar.getTime();
-        viewModel.fetchReports(userID, startDate, endDate);
+        viewModel.fetchReports(userID, startDate, endDate,no_report_found_txt,progressDialog);
     }
 }

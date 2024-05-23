@@ -247,25 +247,62 @@ public class SchedulePickupActivity extends AppCompatActivity {
                     .set(pickupData)
                     .addOnSuccessListener(aVoid -> {
                         // Pickup data saved successfully
-                        // Add points data
                         int points = 100;
-                        Map<String, Object> pointsData = new HashMap<>();
-                        pointsData.put("user", currentUser.getUid()); // Use UID or another unique identifier
-                        pointsData.put("date", formattedDate);
-                        pointsData.put("points", points);
+                        String userId = currentUser.getUid();
+                      //  String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-                        db.collection("points").document(currentUser.getUid()) // Use UID or another unique identifier
-                                .set(pointsData)
-                                .addOnSuccessListener(aVoid1 -> {
-                                    // Points data saved successfully
-                                    progressDialog.dismiss();
-                                    Toast.makeText(SchedulePickupActivity.this, "Congratulations!!, You have received 100 points for scheduling!!", Toast.LENGTH_SHORT).show();
-                                    finish(); // Close the activity after successful scheduling
+                        db.collection("points").document(userId)
+                                .get()
+                                .addOnSuccessListener(documentSnapshot -> {
+                                    if (documentSnapshot.exists()) {
+                                        // Document exists, update the points
+                                        int existingPoints = documentSnapshot.getLong("points").intValue();
+                                        int updatedPoints = existingPoints + points;
+
+                                        Map<String, Object> pointsData = new HashMap<>();
+                                        pointsData.put("user", userId); // Use UID or another unique identifier
+                                        pointsData.put("date", formattedDate);
+                                        pointsData.put("points", updatedPoints);
+
+                                        db.collection("points").document(userId)
+                                                .set(pointsData)
+                                                .addOnSuccessListener(aVoid1 -> {
+                                                    // Points data updated successfully
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(SchedulePickupActivity.this, "Congratulations!! You have received 100 points for scheduling!!", Toast.LENGTH_SHORT).show();
+                                                    finish(); // Close the activity after successful scheduling
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                    // Failed to update points data
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(SchedulePickupActivity.this, "Failed to update points. Please try again later.", Toast.LENGTH_SHORT).show();
+                                                });
+                                    } else {
+                                        // Document does not exist, create new document
+                                        Map<String, Object> pointsData = new HashMap<>();
+                                        pointsData.put("user", userId); // Use UID or another unique identifier
+                                        pointsData.put("date", formattedDate);
+                                        pointsData.put("points", points);
+
+                                        db.collection("points").document(userId)
+                                                .set(pointsData)
+                                                .addOnSuccessListener(aVoid1 -> {
+                                                    // Points data saved successfully
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(SchedulePickupActivity.this, "Congratulations!! You have received 100 points for scheduling!!", Toast.LENGTH_SHORT).show();
+                                                    finish(); // Close the activity after successful scheduling
+                                                })
+                                                .addOnFailureListener(e -> {
+                                                    // Failed to save points data
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(SchedulePickupActivity.this, "Failed to add points. Please try again later.", Toast.LENGTH_SHORT).show();
+                                                });
+                                    }
                                 })
                                 .addOnFailureListener(e -> {
-                                    // Failed to save points data
+                                    // Failed to retrieve points document
                                     progressDialog.dismiss();
-                                    Toast.makeText(SchedulePickupActivity.this, "Failed to add points. Please try again later.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SchedulePickupActivity.this, "Failed to retrieve points information. Please try again later.", Toast.LENGTH_SHORT).show();
                                 });
                     })
                     .addOnFailureListener(e -> {
@@ -273,6 +310,7 @@ public class SchedulePickupActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         Toast.makeText(SchedulePickupActivity.this, "Failed to schedule pickup. Please try again.", Toast.LENGTH_SHORT).show();
                     });
+
 
 
         }

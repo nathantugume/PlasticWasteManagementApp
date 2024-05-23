@@ -38,14 +38,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Set the default area to Uganda
-        LatLngBounds UGANDA_BOUNDS = new LatLngBounds(
-                new LatLng(-1.4783, 29.4241),      // Southwest bound
-                new LatLng(4.2330, 35.0007)       // Northeast bound
+        // Set the default area to Fort Portal, Uganda
+        LatLngBounds FORT_PORTAL_BOUNDS = new LatLngBounds(
+                new LatLng(0.6510, 30.2550),      // Southwest bound (slightly south-west of Fort Portal)
+                new LatLng(0.6910, 30.2950)       // Northeast bound (slightly north-east of Fort Portal)
         );
 
+
         // Move the camera to Uganda and set an appropriate zoom level
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(UGANDA_BOUNDS, 0));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(FORT_PORTAL_BOUNDS, 0));
 
         // Enable zoom controls
         mMap.getUiSettings().setZoomControlsEnabled(true);

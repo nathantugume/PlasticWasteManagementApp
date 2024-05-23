@@ -82,13 +82,24 @@
 
             <!-- RecyclerView to display reports -->
             <androidx.recyclerview.widget.RecyclerView
-
                 android:id="@+id/reportsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <TextView
+                android:id="@+id/no_report_found_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_reports_found"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:textColor="@color/green"
+                android:gravity="center"
+                />
+
 
         </LinearLayout>
         <!-- Spinner for filtering by status -->
@@ -100,8 +111,8 @@
             android:layout_height="wrap_content"
             app:menu="@menu/bottom_navigation_menu"
             android:background="@color/white"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black"
+            app:itemIconTint="@color/green"
+            app:itemTextColor="@color/green"
             app:labelVisibilityMode="labeled"
             android:layout_alignParentBottom="true"/>
 

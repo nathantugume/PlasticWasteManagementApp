@@ -19,17 +19,206 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/white"
+                android:background="@color/green"
                 app:title="Admin Dashboard"
                 app:titleCentered="true"
-                app:titleTextColor="@color/black"
+                app:titleTextColor="@color/white"
                 app:navigationIcon="@drawable/ic_menu_24dp"
+                app:navigationIconTint="@color/white"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Your main content here -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <!-- Scrollable content -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/collection_center_card"
+                        android:layout_width="180dp"
+                        android:layout_height="200dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_margin="5dp"
+                        android:clickable="true"
+
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/collection_center"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:padding="8dp"
+                                android:text="Collection Centers"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="30dp"
+                                android:background="#363A45"
+                                />
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/admin_users_card"
+                        android:layout_width="180dp"
+                        android:layout_height="200dp"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/ic_sorting"
+                            >
+
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:padding="8dp"
+                                android:layout_centerHorizontal="true"
+                                android:text="Users"
+                                android:background="#363A45"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="30dp"
+
+                                />
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <!--    layout 2-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="180dp"
+                            android:layout_height="200dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp"
+                            android:layout_margin="5dp"
+                            android:id="@+id/admin_pickup_card"
+                            app:cardBackgroundColor="@color/white">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@mipmap/ic_schedule"
+                                >
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:padding="8dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Pickups"
+                                    android:textSize="14sp"
+                                    android:layout_marginBottom="30dp"
+                                    android:textColor="@color/white"
+                                    android:background="#363A45"
+                                    />
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/recycling_card"
+                            android:layout_width="180dp"
+                            android:layout_height="200dp"
+                            android:layout_margin="5dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp"
+                            app:cardBackgroundColor="@color/white">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/ic_recycling"
+                                >
+
+
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:padding="8dp"
+                                    android:text="Recycling Tips"
+                                    android:layout_centerHorizontal="true"
+                                    android:textSize="14sp"
+                                    android:layout_marginBottom="30dp"
+                                    android:textColor="@color/white"
+                                    android:background="#363A45"
+                                    />
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </androidx.core.widget.NestedScrollView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/user_bottom_navigation_menu"
+            android:background="@color/white"
+            app:itemIconTint="@color/green"
+            app:itemTextColor="@color/green"
+            app:labelVisibilityMode="labeled"
+            android:layout_gravity="bottom"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

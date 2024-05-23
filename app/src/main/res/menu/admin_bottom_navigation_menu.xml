@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_home"
+        android:enabled="true"
+        android:icon="@drawable/home_24"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/bottom_nav_recycling"
+        android:enabled="true"
+        android:icon="@drawable/ic_recycling"
+        android:title="Recycling"/>
+    <item
+        android:id="@+id/bottom_nav_redeem"
+        android:enabled="true"
+        android:icon="@drawable/ic_redeem"
+        android:title="Redeems"/>
+    <item
+        android:id="@+id/bottom_nav_reports"
+        android:enabled="true"
+        android:icon="@drawable/ic_statistics_24"
+        android:title="Reports"/>
+</menu>

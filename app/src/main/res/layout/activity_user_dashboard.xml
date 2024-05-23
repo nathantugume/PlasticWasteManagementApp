@@ -271,7 +271,8 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
                            android:layout_width="match_parent"
                            android:layout_height="200dp"
                            android:scaleType="centerCrop"
-                           android:src="@mipmap/ic_recycling" />
+                           android:src="@mipmap/ic_recycling"
+                           android:clipToOutline="false"/>
 
                        <TextView
 
@@ -307,8 +308,8 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
         android:layout_height="wrap_content"
         app:menu="@menu/user_bottom_navigation_menu"
         android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/green"
+        app:itemTextColor="@color/green"
         app:labelVisibilityMode="labeled"
         android:layout_gravity="bottom"
         />

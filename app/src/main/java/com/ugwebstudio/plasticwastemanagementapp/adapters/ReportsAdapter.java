@@ -42,8 +42,10 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
     }
 
     public void updateData(List<Report> newReports) {
+
         reports = newReports;
         notifyDataSetChanged();
+
     }
 
     static class ReportViewHolder extends RecyclerView.ViewHolder {

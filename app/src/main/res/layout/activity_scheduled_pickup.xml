@@ -231,8 +231,8 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
         android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/green"
+        app:itemTextColor="@color/green"
         app:labelVisibilityMode="labeled"
         android:layout_alignParentBottom="true"
 

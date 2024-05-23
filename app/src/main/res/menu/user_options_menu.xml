@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/menu/user_options_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/block_user"
+        android:title="Block User"
+        android:icon="@drawable/ic_block_user" />
+    <item
+        android:id="@+id/delete_user"
+        android:title="Delete Delete"
+        android:icon="@drawable/ic_delete_user" />
+</menu>

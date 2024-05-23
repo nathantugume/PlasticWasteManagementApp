@@ -49,4 +49,6 @@
     <string name="home">Home</string>
     <string name="navigation_drawer_open">open drawer</string>
     <string name="navigation_drawer_close">close drawer</string>
+    <string name="no_reports_found">No Reports Found!!</string>
+    <string name="full_name">Full Name</string>
 </resources>
